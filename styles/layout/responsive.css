@@ -1,0 +1,11 @@
+@media (min-width: 431px) {
+  .school-home-web-shell {
+    display: block;
+  }
+}
+
+@media (max-width: 430px) {
+  .school-home-app-shell {
+    display: block;
+  }
+}

@@ -1,0 +1,109 @@
+.alert-overlay {
+  position: fixed;
+  z-index: 80;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.alert-dialog {
+  width: min(320px, 100%);
+  border-radius: 8px;
+  background: var(--color-surface);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+.alert-dialog-content {
+  display: grid;
+  gap: 10px;
+  padding: 24px 20px 16px;
+  text-align: center;
+}
+
+.alert-dialog-title {
+  color: var(--color-text);
+  font-size: 18px;
+}
+
+.alert-dialog-message {
+  margin: 0;
+  color: var(--color-text);
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.alert-dialog-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: 0 20px 20px;
+}
+
+.alert-dialog__button {
+  width: 100%;
+  min-width: 96px;
+  min-height: 48px;
+}
+
+.button--alert-secondary {
+  background: #e0ecff;
+  color: var(--color-text);
+}
+
+.button--danger {
+  background: var(--color-warning);
+  color: #ffffff;
+}
+
+.school-reservation-cancel-alert {
+  background: var(--color-surface);
+  width: min(420px, calc(100vw - 32px));
+  border-radius: 16px;
+}
+
+.school-reservation-cancel-alert .alert-dialog-content {
+  padding: 24px 20px 16px;
+}
+
+.school-reservation-cancel-alert .alert-dialog-message {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.school-reservation-cancel-alert .alert-dialog-actions {
+  gap: 12px;
+  padding: 0 20px 20px;
+}
+
+.school-reservation-cancel-alert .alert-dialog__button {
+  min-height: 56px;
+  border-radius: 8px;
+  font-size: 17px;
+}
+
+.school-reservation-cancel-alert .alert-dialog__button:first-child {
+  flex: 0 0 38%;
+}
+
+.school-reservation-cancel-alert .alert-dialog__button:last-child {
+  flex: 1;
+}
+
+@media (max-width: 430px) {
+  .school-reservation-cancel-alert {
+    width: min(320px, calc(100vw - 32px));
+  }
+
+  .school-reservation-cancel-alert .alert-dialog-message {
+    font-size: 17px;
+  }
+
+  .school-reservation-cancel-alert .alert-dialog__button {
+    min-height: 52px;
+    font-size: 16px;
+  }
+}

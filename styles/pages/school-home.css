@@ -1,0 +1,1831 @@
+.school-home-screen .web-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.school-registration-modal-overlay {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.school-registration-modal {
+  width: min(920px, 100%);
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.school-registration-modal-header {
+  min-height: 72px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.school-registration-modal-header h2 {
+  font-size: 24px;
+}
+
+.school-registration-close-button {
+  position: absolute;
+  right: 16px;
+}
+
+.school-registration-close-button img {
+  width: 24px;
+  height: 24px;
+}
+
+.school-registration-field {
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.school-registration-field h3 {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.school-registration-field--horizontal {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.school-registration-field--horizontal > h3 {
+  width: 116px;
+  flex: 0 0 auto;
+  margin: 12px 0 0;
+}
+
+.school-registration-field--horizontal > .school-registration-member-search-wrap,
+.school-registration-field--horizontal > .school-registration-ticket-menu {
+  flex: 1;
+  min-width: 0;
+}
+
+.school-registration-member-search,
+.school-registration-pet-select {
+  width: 100%;
+  height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2);
+  padding: 0 12px;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.school-registration-member-search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.school-registration-member-list {
+  position: absolute;
+  z-index: 2;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 240px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2);
+  background: var(--color-surface);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  display: none;
+}
+
+.school-registration-member-search-wrap:focus-within .school-registration-member-list {
+  display: block;
+}
+
+.school-registration-member-option {
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding: 8px 12px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-align: left;
+}
+
+.school-registration-member-option:last-child {
+  border-bottom: 0;
+}
+
+.school-registration-member-option.is-selected {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.school-registration-member-empty {
+  margin: 0;
+  padding: 14px 12px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.school-registration-ticket-field {
+  position: relative;
+}
+
+.school-registration-ticket-menu {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.school-registration-ticket-list,
+.school-app-ticket-sheet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.school-registration-ticket-option,
+.school-registration-ticket-trigger {
+  width: 100%;
+  min-height: 52px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2);
+  padding: 0 12px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-align: left;
+}
+
+.school-registration-ticket-option.is-selected {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.school-registration-ticket-menu > .school-registration-ticket-list {
+  position: absolute;
+  z-index: 2;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 240px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2);
+  padding: 4px;
+  background: var(--color-surface);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  display: none;
+}
+
+.school-registration-ticket-menu:focus-within > .school-registration-ticket-list {
+  display: flex;
+}
+
+.school-registration-ticket-menu > .school-registration-ticket-list .school-registration-ticket-option {
+  border: 0;
+}
+
+.school-registration-ticket-option:disabled {
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.school-registration-ticket-trigger:disabled {
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
+}
+
+.school-registration-ticket-empty {
+  margin: 0;
+  padding: 12px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-2);
+  color: var(--color-text-secondary);
+}
+
+.school-registration-ticket-field[data-state="memberRequired"] .school-registration-ticket-empty {
+  border: 1px solid var(--color-border);
+}
+
+.school-app-ticket-sheet-overlay {
+  position: fixed;
+  z-index: 60;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.school-app-ticket-sheet {
+  width: min(100%, 430px);
+  max-height: 70vh;
+  margin: 0 auto;
+  overflow-y: auto;
+  border-radius: 24px 24px 0 0;
+  padding: 20px 16px calc(24px + env(safe-area-inset-bottom));
+  background: var(--color-surface);
+}
+
+.school-app-ticket-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.school-app-ticket-sheet-header h2 { margin: 0; font-size: 20px; }
+
+.school-registration-pet-select {
+  margin-top: 10px;
+}
+
+.school-registration-month-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.school-registration-month-controls strong {
+  min-width: 112px;
+  order: 1;
+  text-align: center;
+  font-size: 18px;
+}
+
+.school-registration-month-controls .button--month:first-child {
+  order: 0;
+}
+
+.school-registration-month-controls .button--month:last-child {
+  order: 2;
+}
+
+.school-registration-calendar {
+  overflow: hidden;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 10px;
+}
+
+.school-registration-weekdays,
+.school-registration-calendar-row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.school-registration-weekdays span {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-weight: 700;
+}
+
+.school-registration-date {
+  position: relative;
+  min-height: 54px;
+  border: 0;
+  border-right: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.school-registration-calendar-row:last-child .school-registration-date {
+  border-bottom: 0;
+}
+
+.school-registration-date:nth-child(7n) {
+  border-right: 0;
+}
+
+.school-registration-date-number {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+}
+
+.school-registration-date-holiday {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  color: var(--color-warning);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.school-registration-date-ticket {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  max-width: 78px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 11px;
+  padding: 0 7px;
+  overflow: hidden;
+  background: var(--color-primary);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.school-registration-date-ticket.is-overbooked {
+  background: #ed6060;
+}
+
+.school-registration-date-overbooked {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.school-registration-date-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.school-registration-date-header > h3 {
+  margin: 0;
+}
+
+.school-registration-date-header > .school-registration-month-controls {
+  margin-bottom: 0;
+}
+
+.school-registration-date.is-checked {
+  background: var(--color-primary-soft);
+  font-weight: 700;
+}
+
+.school-registration-date.is-reserved .school-registration-date-ticket {
+  background: #b8d4fb;
+  color: #315f9e;
+}
+
+.school-registration-date.is-muted,
+.school-registration-date.is-unavailable {
+  background: #fafafb;
+  color: var(--color-text-muted);
+}
+
+.school-registration-date.is-unavailable {
+  cursor: not-allowed;
+}
+
+.school-registration-calendar[data-state="disabled"] {
+  opacity: 0.55;
+}
+
+.school-registration-calendar[data-state="disabled"] .school-registration-date {
+  cursor: not-allowed;
+}
+
+.school-registration-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  padding: 20px 28px 28px;
+}
+
+.school-registration-count {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.school-registration-count span {
+  color: var(--color-primary);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.school-registration-count.is-error span {
+  color: var(--color-warning);
+}
+
+.school-registration-count em {
+  margin-left: auto;
+  color: var(--color-warning);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.school-registration-over-limit-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-warning);
+  font-weight: 700;
+}
+
+.school-registration-over-limit-option input:disabled + span {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.school-registration-submit-button {
+  width: min(300px, 100%);
+  align-self: center;
+  min-width: 220px;
+  height: 48px;
+}
+
+.school-registration-submit-button:disabled {
+  border-color: var(--color-action-disabled);
+  background: var(--color-action-disabled);
+  cursor: not-allowed;
+}
+
+.school-app-registration-over-limit-submit-button {
+  border-color: var(--color-warning);
+  background: var(--color-warning);
+}
+
+.school-registration-over-limit-submit-button {
+  border-color: var(--color-warning);
+  background: var(--color-warning);
+}
+
+.school-registration-actions,
+.pickdrop-registration-modal-footer {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.school-registration-actions .school-registration-submit-button,
+.school-registration-pickdrop-button,
+.pickdrop-registration-modal-footer > button {
+  width: min(300px, 100%);
+  min-width: 0;
+  height: 48px;
+}
+
+.school-registration-pickdrop-button:disabled {
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.pickdrop-registration-modal-overlay {
+  position: fixed;
+  z-index: 60;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.pickdrop-registration-modal {
+  width: min(920px, 100%);
+  height: min(760px, calc(100vh - 48px));
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.pickdrop-registration-modal-header {
+  min-height: 64px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.pickdrop-registration-modal-header h2 {
+  font-size: 20px;
+}
+
+.pickdrop-registration-close-button {
+  position: absolute;
+  right: 12px;
+}
+
+.pickdrop-registration-close-button img {
+  width: 24px;
+  height: 24px;
+}
+
+.pickdrop-registration-modal-body {
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px;
+}
+
+.pickdrop-registration-selected-member {
+  margin-bottom: 12px;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.pickdrop-registration-all-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  height: 34px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.pickdrop-registration-date-list {
+  min-height: 0;
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-2);
+}
+
+.pickdrop-registration-date-row {
+  min-height: 56px;
+  display: grid;
+  grid-template-columns: minmax(88px, 1fr) 88px 88px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.pickdrop-registration-date-row:last-child {
+  border-bottom: 0;
+}
+
+.pickdrop-registration-type-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.pickdrop-registration-modal-footer {
+  padding: 20px 28px 28px;
+}
+
+.school-home-screen .calendar-panel {
+  background: var(--color-surface);
+  border-radius: 12px;
+}
+
+.school-home-screen .calendar-panel[data-platform="web"] {
+  padding: 12px 16px 16px;
+}
+
+.school-home-screen .calendar-panel[data-platform="app"] {
+  display: contents;
+}
+
+.school-home-screen .calendar-header[data-platform="web"] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 12px;
+}
+
+.school-home-screen .calendar-header[data-platform="app"] {
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px 12px;
+}
+
+.school-home-screen .calendar-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.school-home-screen .calendar-controls[data-platform="app"] {
+  justify-content: center;
+}
+
+.school-home-screen .button--today {
+  min-width: 56px;
+  padding: 0 12px;
+}
+
+.school-home-screen .calendar-month-label {
+  min-width: 92px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.school-home-screen .calendar-search-input {
+  width: 340px;
+}
+
+.school-home-screen .calendar-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.school-home-screen .calendar-grid[data-platform="web"] {
+  gap: 0;
+}
+
+.school-home-screen .calendar-weekdays,
+.school-home-screen .calendar-row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.school-home-screen .calendar-grid[data-platform="web"] .calendar-weekdays,
+.school-home-screen .calendar-grid[data-platform="web"] .calendar-row {
+  gap: 0;
+}
+
+.school-home-screen .calendar-weekday {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333333;
+  font-weight: 700;
+}
+
+.school-home-screen .calendar-weekday.is-holiday {
+  color: #ed6060;
+}
+
+.school-home-screen .calendar-date {
+  min-height: 48px;
+  border: 1px solid #f1f1f2;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #333333;
+  font-weight: 500;
+}
+
+.school-home-screen .calendar-grid[data-platform="web"] .calendar-date {
+  position: relative;
+  min-height: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 4px 14px 12px;
+  text-align: left;
+}
+
+.school-home-screen .calendar-date-box {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 4px;
+}
+
+.school-home-screen .calendar-date-number {
+  line-height: 16px;
+}
+
+.school-home-screen .calendar-meta {
+  margin-top: auto;
+  font-size: 12px;
+  line-height: 14px;
+  color: #666666;
+}
+
+.school-home-screen .calendar-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 20px;
+  border-radius: 10px;
+  padding: 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.school-home-screen .calendar-badge.is-closed {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border-radius: 6px;
+  background: #fff1f1;
+  color: #ed6060;
+}
+
+.school-home-screen .calendar-badge.is-closed.is-panel {
+  position: static;
+}
+
+.school-home-screen .calendar-date.is-muted {
+  color: #c4c4c4;
+}
+
+.school-home-screen .calendar-date.is-holiday {
+  color: #ed6060;
+}
+
+.school-home-screen .calendar-date.is-today .calendar-date-number {
+  color: #1e78f0;
+  font-weight: 700;
+}
+
+.school-home-screen .calendar-grid[data-platform="app"] .calendar-date.is-today.is-selected .calendar-date-number {
+  color: #ffffff;
+}
+
+.school-home-screen .calendar-date.is-holiday .calendar-meta {
+  color: #ed6060;
+}
+
+.school-home-screen .calendar-date.is-selected {
+  border-color: #1e78f0;
+  background: #f6f9ff;
+  color: #333333;
+  font-weight: 700;
+}
+
+.school-home-screen .calendar-grid[data-platform="web"] .calendar-date.is-selected .calendar-meta {
+  color: #666666;
+}
+
+.school-home-screen .calendar-grid[data-platform="web"] .calendar-date.is-selected.is-holiday,
+.school-home-screen .calendar-grid[data-platform="web"] .calendar-date.is-selected.is-holiday .calendar-meta {
+  color: #ed6060;
+}
+
+.school-home-screen .calendar-grid[data-platform="app"] {
+  padding: 0 16px 8px;
+}
+
+.school-home-screen .calendar-grid[data-platform="app"] .calendar-weekdays,
+.school-home-screen .calendar-grid[data-platform="app"] .calendar-row {
+  gap: 15px;
+}
+
+.school-home-screen .calendar-grid[data-platform="app"] .calendar-date {
+  min-height: 48px;
+  width: 36px;
+  justify-self: center;
+  border: 0;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+.school-home-screen .calendar-grid[data-platform="app"] .calendar-date-box[data-platform="app"] {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  padding-top: 0;
+}
+
+.school-home-screen .calendar-grid[data-platform="app"] .calendar-date-box[data-platform="app"] .calendar-date-number {
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.school-home-screen .calendar-capacity-text {
+  margin-top: 1px;
+  font-size: 10px;
+  line-height: 12px;
+  color: #919191;
+}
+
+.school-home-screen .calendar-grid[data-platform="app"] .calendar-date.is-selected .calendar-date-box[data-platform="app"] {
+  background: #2f80ed;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.school-home-screen .app-reservation-list {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 12px;
+}
+
+.school-home-screen .app-reservation-item {
+  position: relative;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  border-bottom: 1px solid #f1f1f2;
+}
+
+.school-home-screen .app-reservation-item strong {
+  font-size: 18px;
+}
+
+.school-home-screen .app-reservation-item span {
+  color: #919191;
+  font-size: 17px;
+  word-break: break-word;
+}
+
+.school-home-screen .app-reservation-item .button--icon-tiny {
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.school-home-screen .app-reservation-item .school-reservation-pickdrop-button {
+  margin-left: auto;
+}
+
+.school-home-screen .app-reservation-item .pickdrop-status-badge {
+  height: 20px;
+  padding: 0 6px;
+  color: var(--color-primary);
+  font-size: 11px;
+}
+
+.school-reservation-panel.web {
+  padding: 16px;
+}
+
+.school-reservation-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.school-reservation-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.school-reservation-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.school-pickdrop-roster-button {
+  min-width: 120px;
+  height: 42px;
+}
+
+.pickdrop-roster-overlay {
+  position: fixed;
+  z-index: 65;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.pickdrop-roster-modal {
+  position: relative;
+  width: min(520px, 100%);
+  height: min(680px, calc(100vh - 48px));
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+  border-radius: 12px;
+  padding: 0 24px 24px;
+  background: var(--color-surface);
+}
+
+.pickdrop-roster-header {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.pickdrop-roster-header h2 {
+  font-size: 20px;
+}
+
+.pickdrop-roster-header img {
+  width: 24px;
+  height: 24px;
+}
+
+.pickdrop-roster-date-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 0;
+}
+
+.pickdrop-roster-date-button {
+  min-width: 100px;
+  color: var(--color-text);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.pickdrop-roster-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.pickdrop-roster-tab {
+  height: 42px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-weight: 700;
+}
+
+.pickdrop-roster-tab.is-selected {
+  border-bottom-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.pickdrop-roster-list {
+  min-height: 200px;
+}
+
+.pickdrop-roster-empty {
+  padding: 48px 0;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.pickdrop-roster-item {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.pickdrop-roster-item span {
+  color: var(--color-text-secondary);
+}
+
+.pickdrop-roster-calendar-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding-bottom: 12px;
+}
+
+.pickdrop-roster-calendar {
+  position: absolute;
+  z-index: 1;
+  top: 112px;
+  left: 50%;
+  width: min(320px, calc(100% - 32px));
+  transform: translateX(-50%);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 14px;
+  background: var(--color-surface);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+}
+
+.pickdrop-roster-calendar-controls strong {
+  min-width: 110px;
+  text-align: center;
+}
+
+.pickdrop-roster-calendar-weekdays,
+.pickdrop-roster-calendar-row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.pickdrop-roster-calendar-weekdays span,
+.pickdrop-roster-calendar-date {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pickdrop-roster-calendar-date {
+  border: 0;
+  background: transparent;
+}
+
+.pickdrop-roster-calendar-date.is-selected {
+  background: var(--color-primary);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.pickdrop-roster-calendar-date.is-muted {
+  color: var(--color-text-muted);
+}
+
+.school-reservation-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.school-reservation-title-row > span:first-child {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.school-reservation-title .calendar-badge {
+  font-size: 12px;
+}
+
+.school-reservation-count {
+  color: #1e78f0;
+  font-size: 24px;
+}
+
+.school-reservation-count.is-holiday {
+  color: #ed6060;
+}
+
+.school-reservation-cancel-button {
+  width: 100px;
+  height: 42px;
+  border: 0;
+  border-radius: 8px;
+  background: #d7d7d9;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.school-reservation-cancel-button:not(:disabled) {
+  background: #ed6060;
+}
+
+.school-reservation-cancel-button:disabled {
+  opacity: 0.7;
+}
+
+.school-reservation-table {
+  border: 1px solid #f1f1f2;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.school-reservation-table-row {
+  display: grid;
+  grid-template-columns: 40px 78px repeat(3, minmax(0, 1fr));
+  align-items: center;
+  min-height: 50px;
+  padding: 0 16px 0 0;
+  border-top: 1px solid #f1f1f2;
+  background: #ffffff;
+}
+
+.school-reservation-table-row.is-header {
+  min-height: 40px;
+  border-top: 0;
+  background: #f6f6f6;
+  font-size: 14px;
+}
+
+.school-reservation-table-row > span,
+.school-reservation-table-row > strong {
+  text-align: center;
+  word-break: break-word;
+}
+
+.school-reservation-pickdrop-button {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  border: 0;
+  background: transparent;
+}
+
+.pickdrop-status-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  border-radius: 11px;
+  padding: 0 8px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pickdrop-status-empty {
+  color: var(--color-text-muted);
+}
+
+.pickdrop-editor-menu {
+  position: fixed;
+  z-index: 70;
+  width: min(132px, calc(100vw - 16px));
+  border-radius: var(--radius-2);
+  padding: 10px 12px;
+  background: var(--color-surface);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+}
+
+.pickdrop-editor-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pickdrop-editor-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+}
+
+
+.school-reservation-table-placeholder-row {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
+.school-reservation-table-placeholder {
+  color: #6b7280;
+}
+
+.school-reservation-checkbox-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.school-reservation-status {
+  color: #1e78f0;
+  font-weight: 700;
+}
+
+.school-reservation-status.is-cancelled {
+  color: #ed6060;
+}
+
+.school-reservation-panel-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.school-reservation-hide-cancelled {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.school-home-app-shell {
+  min-height: 100vh;
+  background: #fafafb;
+  padding: 0 0 98px;
+}
+
+.school-home-app-shell .mobile-bottom-nav {
+  position: fixed;
+  z-index: 30;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: min(100vw, 430px);
+  margin: 0 auto;
+  display: flex;
+  height: calc(64px + env(safe-area-inset-bottom));
+  border: 1px solid #f1f1f2;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.school-home-app-shell .nav-item {
+  flex: 1;
+  height: 64px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-text-muted);
+}
+
+.school-home-app-shell .nav-item.is-selected {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.school-app-header {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.school-app-header-row,
+.school-app-nav-left,
+.school-app-nav-title,
+.school-app-nav-actions {
+  display: flex;
+  align-items: center;
+}
+
+.school-app-header-row {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.school-app-nav-left {
+  gap: 12px;
+}
+
+.school-app-nav-icon-box {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #1e78f0;
+}
+
+.school-app-nav-icon-box img {
+  width: 20px;
+  height: 20px;
+}
+
+.school-app-nav-title {
+  position: relative;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.school-app-nav-title strong {
+  font-size: 24px;
+}
+
+.school-app-nav-title span {
+  color: #919191;
+}
+
+.school-app-nav-actions {
+  gap: 12px;
+}
+
+.school-app-register-button {
+  min-width: 88px;
+  height: 36px;
+  padding: 0 14px;
+}
+
+.school-app-reservation-register-screen {
+  display: none;
+}
+
+.school-app-reservation-member-search-screen {
+  display: none;
+}
+
+.school-app-pickdrop-registration-screen {
+  display: none;
+}
+
+.school-app-pickdrop-roster-screen {
+  display: none;
+}
+
+.school-app-sheet {
+  min-height: 394px;
+  margin-top: 8px;
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: 12px 16px 24px;
+  background: #ffffff;
+}
+
+.school-app-sheet-title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 8px 12px;
+}
+
+.school-app-sheet .app-pickdrop-roster-button {
+  align-self: stretch;
+  margin: 0 0 12px;
+}
+
+.school-app-sheet-title-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.school-app-sheet-title span {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.school-holiday-empty-state {
+  min-height: 220px;
+}
+
+.school-holiday-icon {
+  width: 32px;
+  height: 32px;
+}
+
+@media (max-width: 430px) {
+  .school-app-reservation-register-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+  }
+
+  .school-app-reservation-member-search-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 72px 16px 32px;
+    background: var(--color-surface);
+  }
+
+  .school-app-pickdrop-registration-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+  }
+
+  .school-app-pickdrop-roster-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+  }
+
+  .school-app-reservation-member-search-bar {
+    height: 54px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border: 2px solid var(--color-primary);
+    border-radius: 10px;
+    padding: 0 8px;
+  }
+
+  .school-app-reservation-member-search-bar .button--icon {
+    flex: 0 0 40px;
+  }
+
+  .school-app-reservation-member-search-input {
+    min-width: 0;
+    flex: 1;
+    height: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--color-text);
+    font-size: 17px;
+  }
+
+  .school-app-reservation-member-search-clear {
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--color-text-muted);
+    color: #ffffff;
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .school-app-reservation-member-result-list {
+    display: flex;
+    flex-direction: column;
+    margin: 24px 20px 0;
+  }
+
+  .school-app-reservation-member-result {
+    min-height: 64px;
+    border: 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+    background: transparent;
+    color: var(--color-text);
+    text-align: left;
+    font-size: 17px;
+  }
+
+  .school-app-reservation-member-result-empty {
+    padding: 24px 0;
+    color: var(--color-text-secondary);
+    text-align: center;
+  }
+
+  .school-app-reservation-register-header {
+    min-height: 60px;
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 40px;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding: 0 12px;
+  }
+
+  .school-app-reservation-register-header h1 {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .school-app-reservation-register-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 28px 16px 32px;
+  }
+
+  .school-app-pickdrop-registration-body {
+    min-height: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 28px 16px;
+  }
+
+  .school-app-pickdrop-roster-button {
+    margin: 0;
+  }
+
+  .school-app-pickdrop-roster-body {
+    position: relative;
+    min-height: 0;
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 16px 28px;
+  }
+
+  .school-app-pickdrop-roster-body .pickdrop-roster-date-navigation {
+    padding: 18px 0;
+  }
+
+  .school-app-pickdrop-roster-body .pickdrop-roster-tabs {
+    margin: 0 -16px;
+  }
+
+  .school-app-pickdrop-roster-body .pickdrop-roster-list {
+    padding: 0 4px;
+  }
+
+  .school-app-pickdrop-roster-body .pickdrop-roster-calendar {
+    top: 92px;
+  }
+
+  .school-app-pickdrop-registration-selected-member {
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  .school-app-pickdrop-registration-all-option {
+    margin-bottom: 12px;
+  }
+
+  .school-app-pickdrop-registration-date-list {
+    flex: 0 0 auto;
+    overflow: visible;
+    border-radius: 10px;
+  }
+
+  .school-app-pickdrop-registration-date-row {
+    grid-template-columns: minmax(96px, 1fr) 76px 76px;
+    min-height: 60px;
+  }
+
+  .school-app-pickdrop-registration-footer {
+    flex: 0 0 auto;
+    display: flex;
+    gap: 8px;
+    border-top: 1px solid var(--color-border-subtle);
+    padding: 12px 16px calc(16px + env(safe-area-inset-bottom));
+    background: var(--color-surface);
+  }
+
+  .school-app-pickdrop-registration-footer > button {
+    flex: 1;
+    height: 48px;
+  }
+
+  .school-app-reservation-register-body .school-registration-field {
+    border: 0;
+    padding: 0;
+  }
+
+  .school-app-reservation-register-body .school-registration-member-field {
+    margin-bottom: 40px;
+  }
+
+  .school-app-reservation-register-body .school-registration-member-row {
+    display: block;
+  }
+
+  .school-app-reservation-register-body .school-registration-member-row h3,
+  .school-app-reservation-register-body .school-registration-date-field h3 {
+    width: auto;
+    margin: 0 0 14px;
+    font-size: 22px;
+  }
+
+  .school-app-reservation-register-body .school-registration-member-search {
+    height: 52px;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+
+  .school-app-reservation-register-body .school-registration-month-controls {
+    justify-content: center;
+    margin: 20px 0 12px;
+  }
+
+  .school-app-reservation-register-body .school-registration-calendar {
+    border: 0;
+    border-radius: 0;
+  }
+
+  .school-app-reservation-register-body .school-registration-weekdays span {
+    height: 40px;
+    border: 0;
+  }
+
+  .school-app-reservation-register-body .school-registration-date {
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+  }
+
+  .school-app-reservation-register-body .school-registration-date-number,
+  .school-app-reservation-register-body .school-registration-date-holiday {
+    position: static;
+  }
+
+  .school-app-reservation-register-body .school-registration-date.is-muted,
+  .school-app-reservation-register-body .school-registration-date.is-unavailable {
+    background: transparent;
+  }
+
+  .school-app-reservation-register-body .school-registration-date.is-reserved {
+    color: var(--color-text-muted);
+    cursor: not-allowed;
+  }
+
+  .school-app-reservation-register-body .school-registration-date.is-checked {
+    background: transparent;
+    color: #ffffff;
+  }
+
+  .school-app-reservation-register-body .school-registration-date.is-checked::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: min(52px, calc(14.2857vw - 6.6px));
+    aspect-ratio: 1;
+    margin: auto;
+    border-radius: 50%;
+    background: var(--color-primary);
+  }
+
+  .school-app-reservation-register-body .school-registration-date.is-ticket-locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .school-app-reservation-register-body .school-registration-date.is-ticket-locked::before {
+    background: var(--color-primary);
+  }
+
+  .school-app-reservation-register-body .school-registration-date.is-checked .school-registration-date-number,
+  .school-app-reservation-register-body .school-registration-date.is-checked .school-registration-date-holiday {
+    position: relative;
+    inset: auto;
+    z-index: 1;
+    color: inherit;
+  }
+
+  .school-app-reservation-register-body .school-registration-date.is-checked .school-registration-date-number {
+    line-height: normal;
+  }
+
+  .school-app-reservation-register-body .school-registration-date.is-checked .school-registration-date-holiday {
+    color: #ffffff;
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .school-app-reservation-register-body .school-registration-date-overbooked {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    z-index: 1;
+    color: #ffffff;
+    font-size: 10px;
+  }
+
+  .school-registration-footer.school-app-reservation-registration-footer {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-top: 1px solid var(--color-border-subtle);
+    background: var(--color-surface);
+  }
+
+  .school-app-reservation-registration-footer .school-registration-count {
+    flex: 1 1 auto;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .school-app-reservation-registration-footer .school-registration-count strong {
+    color: #bdbdbd;
+    font-size: clamp(16px, 3.4vw, 26px);
+    line-height: 1.2;
+  }
+
+  .school-app-reservation-registration-footer .school-registration-count span {
+    color: var(--color-text);
+    font-size: clamp(28px, 4.4vw, 38px);
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  .school-app-reservation-registration-footer .school-registration-count.is-error span {
+    color: var(--color-warning);
+  }
+
+  .school-app-reservation-registration-footer .school-registration-actions {
+    flex: 0 0 min(288px, 42vw);
+    width: min(288px, 42vw);
+  }
+
+  .school-app-reservation-registration-footer .school-registration-submit-button {
+    width: 100%;
+    min-width: 0;
+    height: clamp(72px, 13.5vw, 104px);
+    border-radius: 16px;
+    font-size: clamp(22px, 3.8vw, 32px);
+  }
+
+  .school-registration-modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .school-registration-modal {
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 24px);
+    border-radius: 18px 18px 0 0;
+  }
+
+  .school-registration-modal-header {
+    min-height: 60px;
+  }
+
+  .school-registration-modal-header h2 {
+    font-size: 20px;
+  }
+
+  .school-registration-field {
+    padding: 16px;
+  }
+
+  .school-registration-field--horizontal {
+    display: block;
+  }
+
+  .school-registration-field--horizontal > h3 {
+    width: auto;
+    margin: 0 0 12px;
+  }
+
+  .school-registration-member-row {
+    display: block;
+  }
+
+  .school-registration-member-row h3 {
+    width: auto;
+    margin: 0 0 12px;
+  }
+
+  .school-registration-member-option {
+    width: 100%;
+  }
+
+  .school-registration-date {
+    min-height: 44px;
+  }
+
+  .school-registration-footer {
+    flex-wrap: wrap;
+    padding: 16px;
+  }
+
+  .school-registration-submit-button {
+    width: 100%;
+    min-width: 0;
+    order: 3;
+  }
+
+  .school-registration-actions {
+    width: 100%;
+  }
+
+  .pickdrop-registration-modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .pickdrop-registration-modal {
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 24px);
+    border-radius: 18px 18px 0 0;
+  }
+
+  .pickdrop-registration-date-row {
+    grid-template-columns: minmax(74px, 1fr) 72px 72px;
+    padding: 0 12px;
+  }
+
+  .pickdrop-registration-modal-footer {
+    padding: 16px;
+  }
+}
