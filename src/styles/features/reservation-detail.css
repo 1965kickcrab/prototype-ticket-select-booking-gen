@@ -1,0 +1,153 @@
+.reservation-detail {
+  padding-bottom: 112px;
+}
+
+.reservation-detail__content {
+  padding: 24px;
+}
+
+.reservation-detail__type {
+  padding: 16px 12px;
+  color: #ffffff;
+  background: #9fd15d;
+  border-radius: var(--radius-4);
+  font-weight: 700;
+}
+
+.reservation-detail__section {
+  position: relative;
+  margin-top: 40px;
+}
+
+.reservation-detail__section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reservation-detail__section-title {
+  margin: 0;
+}
+
+.reservation-information {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 14px 16px;
+  margin: 28px 70px 0 10px;
+  font-size: 18px;
+}
+
+.reservation-information dt {
+  color: var(--color-text-secondary);
+  font-weight: 700;
+}
+
+.reservation-information dd {
+  margin: 0;
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.reservation-information__phone {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  width: 56px;
+  height: 56px;
+  place-items: center;
+  color: #9d9d9d;
+  background: #fafafa;
+  border: 1px solid var(--color-border-light);
+  border-radius: 14px;
+  font-size: 28px;
+}
+
+.reservation-detail__selection-action {
+  padding: 4px 0;
+  color: var(--color-primary);
+  background: transparent;
+  border: 0;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.reservation-detail__notice {
+  margin: 22px 0;
+  padding: 16px;
+  color: var(--color-warning);
+  background: var(--color-warning-soft);
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.reservation-pet-card {
+  display: flex;
+  width: 100%;
+  min-height: 118px;
+  margin-top: 12px;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--color-text);
+  text-align: left;
+}
+
+.reservation-pet-card:disabled {
+  color: var(--color-text);
+}
+
+.reservation-pet-card__content {
+  display: grid;
+  gap: 6px;
+}
+
+.reservation-pet-card__name {
+  font-size: 21px;
+}
+
+.reservation-pet-card__ticket {
+  color: var(--color-text-secondary);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.reservation-pet-card__check {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  color: var(--color-primary);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.reservation-pet-card__check--selected {
+  color: #ffffff;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.reservation-detail__empty {
+  margin: 48px 0 0;
+}
+
+.reservation-detail__footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 16px 24px 24px;
+  background: var(--color-surface);
+}
+
+.reservation-detail__cancel {
+  display: block;
+  width: min(100%, 382px);
+  margin: 0 auto;
+}

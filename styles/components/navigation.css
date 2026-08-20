@@ -1,7 +1,0 @@
-.nav-item,
-.business-side-nav-item,
-.side-nav-item {
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  color: var(--color-text);
-}

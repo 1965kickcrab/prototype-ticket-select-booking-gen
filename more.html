@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>더보기</title>
+    <link rel="stylesheet" href="src/styles/app.css" />
+  </head>
+  <body>
+    <main class="more-home app-screen" aria-labelledby="more-title">
+      <header class="more-home__header">
+        <h1 class="more-home__title visually-hidden" id="more-title">더보기</h1>
+        <div class="more-home__header-actions" aria-label="빠른 메뉴">
+          <button class="more-home__text-button" type="button" data-action="open-notifications">알림</button>
+          <button class="more-home__text-button" type="button" data-action="open-settings">설정</button>
+        </div>
+      </header>
+
+      <button class="profile-summary" type="button" data-action="open-profile">
+        <span class="profile-summary__avatar" aria-hidden="true">
+          <img class="profile-summary__avatar-icon" src="assets/icons/menuIcon_profile.svg" alt="" />
+        </span>
+        <span class="profile-summary__content">
+          <span class="profile-summary__label">내 정보</span>
+          <strong class="profile-summary__phone" data-field="guardian-phone"></strong>
+        </span>
+      </button>
+
+      <section class="quick-menu" aria-label="빠른 메뉴">
+        <button class="quick-menu__item" type="button" data-action="open-reservations">예약 내역</button>
+        <button class="quick-menu__item" type="button" data-action="open-my-tickets">이용권</button>
+        <button class="quick-menu__item" type="button" disabled>내 반려견</button>
+        <button class="quick-menu__item" type="button" data-action="open-inquiry">카톡 문의</button>
+      </section>
+
+      <nav class="more-links" aria-label="도움말 메뉴">
+        <button class="more-links__item" type="button" data-action="phone-inquiry">
+          전화번호 변경 문의
+        </button>
+        <button class="more-links__item" type="button" data-action="open-faq">
+          자주 묻는 질문
+        </button>
+        <button class="more-links__item" type="button" data-action="open-notices">
+          공지사항 &amp; 새소식
+        </button>
+      </nav>
+    </main>
+
+    <div data-component="bottom-navigation"></div>
+    <script type="module" src="src/more-main.js"></script>
+  </body>
+</html>

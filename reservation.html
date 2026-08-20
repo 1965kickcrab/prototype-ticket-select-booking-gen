@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>예약</title>
+    <link rel="stylesheet" href="src/styles/app.css" />
+  </head>
+  <body>
+    <main class="reservation-form app-screen" aria-labelledby="reservation-form-title">
+      <header class="reservation-form__header app-header app-header--sticky">
+        <button class="reservation-form__close app-header__button" type="button" data-action="close-reservation-form" aria-label="예약 화면 닫기">×</button>
+        <h1 class="reservation-form__title app-header__title" id="reservation-form-title">예약</h1>
+        <span aria-hidden="true"></span>
+      </header>
+
+      <div class="reservation-form__content">
+        <section class="reservation-form__section" aria-labelledby="business-title">
+          <h2 class="reservation-form__section-title section-title" id="business-title">예약 업체</h2>
+          <p class="reservation-form__business">다이얼독 유치원</p>
+        </section>
+
+        <section class="reservation-form__section" aria-labelledby="pet-selection-title">
+          <h2 class="reservation-form__section-title section-title" id="pet-selection-title">반려견 선택</h2>
+          <p class="reservation-form__notice">여러마리 예약 시<br />횟수와 예약 가능 날짜는 변경될 수 있습니다.</p>
+          <div class="pet-selector" data-field="pet-list"></div>
+        </section>
+
+        <section class="reservation-form__section" data-field="ticket-section" aria-labelledby="ticket-selection-title">
+          <div class="reservation-form__section-heading">
+            <h2 class="reservation-form__section-title section-title" id="ticket-selection-title">이용권 선택</h2>
+          </div>
+          <button class="reservation-ticket-field" type="button" data-action="open-ticket-selection" disabled>
+            <span class="reservation-ticket-field__label" data-field="ticket-selection-summary">이용권 선택 (0/0)</span>
+            <span class="reservation-ticket-field__chevron" aria-hidden="true">›</span>
+          </button>
+        </section>
+
+        <section class="reservation-form__section reservation-form__section--calendar" data-field="date-section" data-state="locked" aria-labelledby="date-selection-title">
+          <h2 class="reservation-form__section-title section-title" id="date-selection-title">날짜 선택</h2>
+          <section class="calendar calendar--reservation-selection" aria-label="예약 날짜 선택">
+            <header class="calendar__header">
+              <button class="calendar__month-button" type="button" data-action="previous-reservation-month" aria-label="이전 달"><span aria-hidden="true">‹</span></button>
+              <h3 class="calendar__month" data-field="reservation-month-label"></h3>
+              <button class="calendar__month-button" type="button" data-action="next-reservation-month" aria-label="다음 달"><span aria-hidden="true">›</span></button>
+            </header>
+            <div class="calendar__weekdays" aria-hidden="true">
+              <span class="calendar__weekday">일</span><span class="calendar__weekday">월</span><span class="calendar__weekday">화</span><span class="calendar__weekday">수</span><span class="calendar__weekday">목</span><span class="calendar__weekday">금</span><span class="calendar__weekday">토</span>
+            </div>
+            <div class="calendar__days" data-field="reservation-calendar-days" role="grid" aria-label="예약 날짜"></div>
+          </section>
+        </section>
+      </div>
+
+      <section class="ticket-selection-sheet" data-state="hidden" hidden aria-labelledby="ticket-sheet-title">
+        <button class="ticket-selection-sheet__backdrop" type="button" data-action="close-ticket-selection" aria-label="이용권 선택 닫기"></button>
+        <div class="ticket-selection-sheet__panel">
+          <div class="ticket-selection-sheet__handle" aria-hidden="true"></div>
+          <h2 class="ticket-selection-sheet__title" id="ticket-sheet-title" data-field="ticket-sheet-title">이용권 선택</h2>
+          <div class="ticket-selection-sheet__tabs" data-field="ticket-tabs" role="tablist" aria-label="반려견 선택"></div>
+          <div class="ticket-selection-sheet__options" data-field="ticket-options"></div>
+        </div>
+      </section>
+
+      <footer class="reservation-form__footer">
+        <p class="reservation-counter"><span class="reservation-counter__label">선택</span><strong class="reservation-counter__value" data-field="selected-date-count">0건</strong></p>
+        <span class="reservation-counter__divider" aria-hidden="true">/</span>
+        <p class="reservation-counter"><span class="reservation-counter__label">예약 가능</span><strong class="reservation-counter__value" data-field="remaining-count">0회</strong></p>
+        <button class="reservation-form__submit action-button" type="button" data-action="submit-reservation" disabled>예약</button>
+      </footer>
+    </main>
+
+    <script type="module" src="src/reservation-form-main.js"></script>
+  </body>
+</html>

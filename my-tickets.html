@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이용권 내역</title>
+    <link rel="stylesheet" href="src/styles/app.css" />
+  </head>
+  <body>
+    <main class="my-tickets app-screen" data-component="my-tickets" aria-labelledby="my-tickets-title">
+      <header class="my-tickets__header app-header">
+        <button class="my-tickets__back app-header__button" type="button" data-action="go-back" aria-label="더보기로 돌아가기">
+          <img src="assets/icons/iconBack.svg" alt="" />
+        </button>
+        <h1 class="my-tickets__title app-header__title" id="my-tickets-title">이용권 내역</h1>
+        <span aria-hidden="true"></span>
+      </header>
+
+      <div class="my-tickets__content">
+        <section class="my-tickets__pet-section" aria-labelledby="my-tickets-pets-title">
+          <h2 class="my-tickets__section-title section-title" id="my-tickets-pets-title">내 반려견</h2>
+          <div class="my-tickets-pet-selector" data-field="pet-list" role="radiogroup" aria-label="반려견 선택"></div>
+          <p class="my-tickets__empty empty-state" data-field="empty-message" hidden>등록된 반려견이 없습니다.</p>
+        </section>
+
+        <section class="my-tickets__business-section" aria-labelledby="my-tickets-business-title">
+          <h2 class="visually-hidden" id="my-tickets-business-title">업체별 이용권</h2>
+          <div class="my-tickets-business-list" data-field="business-list"></div>
+        </section>
+      </div>
+    </main>
+
+    <script type="module" src="src/my-tickets-main.js"></script>
+  </body>
+</html>

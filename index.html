@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>예약 홈</title>
+    <link rel="stylesheet" href="src/styles/app.css" />
+  </head>
+  <body>
+    <main class="reservation-home app-screen" aria-labelledby="reservation-title">
+      <h1 class="visually-hidden" id="reservation-title">예약</h1>
+
+      <section class="calendar" aria-label="예약 달력">
+        <header class="calendar__header">
+          <button class="calendar__month-button" type="button" data-action="previous-month" aria-label="이전 달"><span aria-hidden="true">‹</span></button>
+          <h2 class="calendar__month" data-field="month-label"></h2>
+          <button class="calendar__month-button" type="button" data-action="next-month" aria-label="다음 달"><span aria-hidden="true">›</span></button>
+        </header>
+        <div class="calendar__weekdays" aria-hidden="true">
+          <span class="calendar__weekday">일</span><span class="calendar__weekday">월</span><span class="calendar__weekday">화</span><span class="calendar__weekday">수</span><span class="calendar__weekday">목</span><span class="calendar__weekday">금</span><span class="calendar__weekday">토</span>
+        </div>
+        <div class="calendar__days" data-field="calendar-days" role="grid" aria-label="날짜 선택"></div>
+      </section>
+
+      <section class="reservation-summary" aria-live="polite">
+        <h2 class="reservation-summary__date" data-field="selected-date"></h2>
+        <p class="reservation-summary__empty empty-state" data-field="empty-message">예약이 없습니다.</p>
+        <div class="reservation-summary__list" data-field="reservation-list"></div>
+      </section>
+
+      <a class="floating-action" href="reservation.html">
+        <span class="floating-action__icon" aria-hidden="true">+</span>
+        <span>예약</span>
+      </a>
+
+      <p class="toast reservation-cancellation-toast" data-field="reservation-cancellation-toast" role="status" hidden>예약을 성공적으로 취소했습니다.</p>
+    </main>
+
+    <div data-component="bottom-navigation"></div>
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,276 @@
+.reservation-history-detail {
+  padding-bottom: 32px;
+}
+
+.reservation-history-detail__notice {
+  margin: 20px;
+  padding: 16px;
+  color: var(--color-warning);
+  background: var(--color-warning-soft);
+  border-radius: var(--radius-3);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.reservation-overview {
+  padding: 30px 28px 34px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.reservation-overview__status {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.reservation-overview__status[data-state="cancelled"] {
+  color: var(--color-warning);
+}
+
+.reservation-overview__business-name {
+  margin: 28px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.reservation-overview__service-type {
+  margin: 8px 0 0;
+  color: var(--color-text);
+  font-size: 27px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.reservation-overview__created-at {
+  margin: 20px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.reservation-group-information {
+  padding: 28px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.reservation-group-information__title,
+.reservation-pet-information__title {
+  margin: 0;
+}
+
+.reservation-group-information__list {
+  display: grid;
+  grid-template-columns: 104px 1fr;
+  gap: 14px;
+  margin: 24px 0 0;
+  font-size: 18px;
+}
+
+.reservation-group-information__list dt {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.reservation-group-information__list dd {
+  margin: 0;
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.reservation-pet-information {
+  padding: 28px;
+}
+
+.reservation-pet-information__list {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.reservation-pet-accordion {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--color-border-light);
+  border-radius: 22px;
+}
+
+.reservation-pet-accordion__toggle {
+  display: grid;
+  width: 100%;
+  padding: 0;
+  color: var(--color-text);
+  background: transparent;
+  border: 0;
+  text-align: left;
+}
+
+.reservation-pet-accordion__toggle:focus-visible {
+  outline: 3px solid #b9d5ff;
+  outline-offset: -3px;
+}
+
+.reservation-pet-accordion__profile {
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  gap: 16px;
+  box-sizing: border-box;
+  color: var(--color-text);
+}
+
+.reservation-pet-accordion__avatar {
+  width: 72px;
+  height: 72px;
+  flex: 0 0 72px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #e1ecff;
+  border-radius: 50%;
+}
+
+.reservation-pet-accordion__content {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+  gap: 5px;
+}
+
+.reservation-pet-accordion__name {
+  font-size: 22px;
+}
+
+.reservation-pet-accordion__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 6px;
+  color: var(--color-text-secondary);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.reservation-pet-accordion__weight {
+  white-space: nowrap;
+}
+
+.reservation-pet-accordion__weight::before {
+  margin-right: 6px;
+  content: "·";
+}
+
+.reservation-pet-accordion__summary {
+  display: flex;
+  min-height: 58px;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.reservation-pet-accordion__count {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.reservation-pet-accordion__fold {
+  width: 0;
+  height: 0;
+  border-right: 7px solid transparent;
+  border-top: 9px solid var(--color-text);
+  border-left: 7px solid transparent;
+}
+
+.reservation-pet-accordion__fold--expanded {
+  border-top: 0;
+  border-bottom: 9px solid var(--color-text);
+}
+
+.reservation-pet-accordion__date-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0 20px 22px;
+  list-style: none;
+}
+
+.reservation-pet-accordion__date-list[hidden] {
+  display: none;
+}
+
+.reservation-date-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 16px;
+}
+
+.reservation-date-status__information {
+  display: grid;
+  gap: 4px;
+}
+
+.reservation-date-status__ticket {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.reservation-date-status__state--confirmed {
+  color: var(--color-primary);
+}
+
+.reservation-date-status__state--canceled {
+  color: var(--color-warning);
+}
+
+.reservation-cancel-dialog {
+  box-sizing: border-box;
+  width: min(calc(100% - 40px), 350px);
+  padding: 24px;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 0;
+  border-radius: 20px;
+}
+
+.reservation-cancel-dialog::backdrop {
+  background: rgb(0 0 0 / 45%);
+}
+
+.reservation-cancel-dialog__description {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.reservation-cancel-dialog__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.reservation-cancel-dialog__button {
+  min-height: 48px;
+  padding: 0 12px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.reservation-cancel-dialog__button--close {
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.reservation-cancel-dialog__button--confirm {
+  color: var(--color-action-text);
+  background: var(--color-warning);
+  border: 1px solid var(--color-warning);
+}

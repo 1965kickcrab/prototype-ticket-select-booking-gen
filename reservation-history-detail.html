@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>예약 내역 상세</title>
+    <link rel="stylesheet" href="src/styles/app.css" />
+  </head>
+  <body>
+    <main class="reservation-history-detail app-screen" aria-labelledby="reservation-history-detail-title">
+      <header class="reservation-history-detail__header app-header app-header--with-action">
+        <button class="reservation-history-detail__back app-header__button" type="button" data-action="go-back" aria-label="예약 내역으로 돌아가기">
+          <img src="assets/icons/iconBack.svg" alt="" />
+        </button>
+        <h1 class="reservation-history-detail__title app-header__title" id="reservation-history-detail-title">예약 내역 상세</h1>
+        <button class="reservation-history-detail__cancel-all app-header__action app-header__action--danger" type="button" data-action="cancel-all" data-field="cancel-all">전체 취소</button>
+      </header>
+
+      <p class="reservation-history-detail__notice" data-field="cancellation-notice" hidden>24시간 전인 예약이 있어 전체 취소할 수 없습니다.</p>
+
+      <section class="reservation-overview" aria-labelledby="reservation-overview-title">
+        <p class="reservation-overview__status" data-field="reservation-status"></p>
+        <p class="reservation-overview__business-name" data-field="business-name"></p>
+        <h2 class="reservation-overview__service-type" id="reservation-overview-title" data-field="service-type"></h2>
+        <p class="reservation-overview__created-at" data-field="created-at"></p>
+      </section>
+
+      <section class="reservation-group-information" aria-labelledby="reservation-group-information-title">
+        <h2 class="reservation-group-information__title section-title" id="reservation-group-information-title">예약 정보</h2>
+        <dl class="reservation-group-information__list">
+          <dt>예약자</dt><dd data-field="guardian-name"></dd>
+          <dt>예약 건수</dt><dd data-field="reservation-count"></dd>
+        </dl>
+      </section>
+
+      <section class="reservation-pet-information" aria-labelledby="reservation-pet-information-title">
+        <h2 class="reservation-pet-information__title section-title" id="reservation-pet-information-title">반려견 예약 정보</h2>
+        <div class="reservation-pet-information__list" data-field="pet-groups"></div>
+      </section>
+
+      <p class="toast reservation-completion-toast" data-field="reservation-completion-toast" role="status" hidden>예약이 완료되었습니다.</p>
+    </main>
+
+    <dialog class="reservation-cancel-dialog" data-field="cancel-dialog" aria-label="예약 취소 확인" aria-describedby="reservation-cancel-dialog-description">
+      <p class="reservation-cancel-dialog__description" id="reservation-cancel-dialog-description">예약을 취소하시겠습니까?<br />취소 후에는 변경이 불가능합니다.</p>
+      <div class="reservation-cancel-dialog__actions">
+        <button class="reservation-cancel-dialog__button reservation-cancel-dialog__button--close" type="button" data-action="close-cancel-dialog">닫기</button>
+        <button class="reservation-cancel-dialog__button reservation-cancel-dialog__button--confirm" type="button" data-action="confirm-cancel-all">예약 취소</button>
+      </div>
+    </dialog>
+
+    <script type="module" src="src/reservation-history-detail-main.js"></script>
+  </body>
+</html>

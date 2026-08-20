@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>이용권 사용 내역</title>
+    <link rel="stylesheet" href="src/styles/app.css" />
+  </head>
+  <body>
+    <main class="ticket-history app-screen" data-component="ticket-history" aria-labelledby="ticket-history-title">
+      <header class="ticket-history__header app-header">
+        <button class="ticket-history__back app-header__button" type="button" data-action="go-back" aria-label="이용권 내역으로 돌아가기">
+          <img src="assets/icons/iconBack.svg" alt="" />
+        </button>
+        <h1 class="ticket-history__title app-header__title" id="ticket-history-title">이용권 사용 내역</h1>
+        <span aria-hidden="true"></span>
+      </header>
+
+      <div class="ticket-history__content">
+        <p class="ticket-history__notice" data-field="availability-notice"></p>
+        <section class="ticket-summary" aria-label="이용권 요약">
+          <h2 class="ticket-summary__name" data-field="ticket-name"></h2>
+          <p class="ticket-summary__meta" data-field="ticket-meta"></p>
+        </section>
+
+        <div class="ticket-history__tabs" role="tablist" aria-label="이용권 정보">
+          <button class="ticket-history__tab" type="button" data-action="select-tab" data-entity-id="status" role="tab" aria-selected="true">이용권 상태</button>
+          <button class="ticket-history__tab" type="button" data-action="select-tab" data-entity-id="history" role="tab" aria-selected="false">사용 내역</button>
+        </div>
+
+        <section class="ticket-history__panel" data-field="ticket-panel"></section>
+      </div>
+    </main>
+
+    <script type="module" src="src/ticket-history-main.js"></script>
+  </body>
+</html>

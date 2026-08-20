@@ -1,0 +1,117 @@
+.reservation-history__tabs {
+  display: flex;
+  gap: 10px;
+  padding: 16px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.reservation-history__tab {
+  display: grid;
+  min-width: 84px;
+  min-height: 35px;
+  padding: 0 20px;
+  place-items: center;
+  box-sizing: border-box;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-4);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+button.reservation-history__tab {
+  cursor: default;
+}
+
+.reservation-history__tab--active {
+  color: #ffffff;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.reservation-history__content {
+  padding: 20px;
+}
+
+.reservation-history__empty {
+  margin: 84px 0;
+}
+
+.reservation-group {
+  padding: 24px;
+  background: var(--color-surface);
+  border-radius: 24px;
+}
+
+.reservation-group + .reservation-group {
+  margin-top: 16px;
+}
+
+.reservation-pet-group + .reservation-pet-group {
+  margin-top: 28px;
+}
+
+.reservation-pet-group__title {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.reservation-pet-group--cancelled .reservation-pet-group__title {
+  color: var(--color-warning);
+}
+
+.reservation-pet-group__list {
+  display: grid;
+  gap: 22px;
+  margin-top: 24px;
+}
+
+.reservation-summary-item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.reservation-summary-item__avatar {
+  width: 82px;
+  height: 82px;
+  flex: 0 0 82px;
+  padding: 12px;
+  box-sizing: border-box;
+  background: #e1ecff;
+  border-radius: 50%;
+}
+
+.reservation-summary-item__content {
+  min-width: 0;
+}
+
+.reservation-summary-item__date,
+.reservation-summary-item__type {
+  margin: 0;
+}
+
+.reservation-summary-item__date {
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.reservation-summary-item__type {
+  margin-top: 7px;
+  color: var(--color-text);
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.reservation-summary-item__pet-name {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-text);
+  font-size: 25px;
+  font-weight: 800;
+}

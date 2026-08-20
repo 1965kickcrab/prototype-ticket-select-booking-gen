@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>예약 내역</title>
+    <link rel="stylesheet" href="src/styles/app.css" />
+  </head>
+  <body>
+    <main class="reservation-history app-screen app-screen--subtle" aria-labelledby="reservation-history-title">
+      <header class="reservation-history__header app-header">
+        <button class="reservation-history__back app-header__button" type="button" data-action="go-back" aria-label="더보기로 돌아가기">
+          <img src="assets/icons/iconBack.svg" alt="" />
+        </button>
+        <h1 class="reservation-history__title app-header__title" id="reservation-history-title">예약 내역</h1>
+        <span aria-hidden="true"></span>
+      </header>
+
+      <div class="reservation-history__tabs" aria-label="예약 유형">
+        <button class="reservation-history__tab reservation-history__tab--active" type="button" aria-current="page">유치원</button>
+        <span class="reservation-history__tab" aria-disabled="true">호텔링</span>
+      </div>
+
+      <section class="reservation-history__content" aria-live="polite">
+        <p class="reservation-history__empty empty-state" data-field="empty-message" hidden>예약 내역이 없습니다.</p>
+        <div data-field="reservation-groups"></div>
+      </section>
+    </main>
+
+    <script type="module" src="src/reservation-history-main.js"></script>
+  </body>
+</html>
