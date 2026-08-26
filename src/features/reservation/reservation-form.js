@@ -4,6 +4,7 @@ import {
   getSelectedPetAvailability,
 } from '../../services/reservation-availability.js';
 import {
+  getDefaultSchoolTicket,
   getPetReservableCount,
   getSchoolTicket,
   getSchoolTickets,
@@ -34,7 +35,6 @@ export function createReservationForm(root, { onClose } = {}) {
     displayedMonth: new Date(today.getFullYear(), today.getMonth(), 1),
     selectedPetIds: new Set(),
     selectedTicketIdsByPetId: new Map(),
-    heldTicketIdsByDate: new Map(),
     activeTicketPetId: null,
     selectedDates: new Set(),
   };
@@ -47,11 +47,8 @@ export function createReservationForm(root, { onClose } = {}) {
   const submitButton = root.querySelector('[data-action="submit-reservation"]');
   const notice = root.querySelector('.reservation-form__notice');
   const footer = root.querySelector('.reservation-form__footer');
-  const ticketSection = root.querySelector('[data-field="ticket-section"]');
-  const ticketSelectionField = root.querySelector('[data-action="open-ticket-selection"]');
-  const ticketSelectionSummary = root.querySelector('[data-field="ticket-selection-summary"]');
   const ticketSelectionSheet = root.querySelector('.ticket-selection-sheet');
-  const ticketTabs = root.querySelector('[data-field="ticket-tabs"]');
+  const ticketSheetTitle = root.querySelector('[data-field="ticket-sheet-title"]');
   const ticketOptions = root.querySelector('[data-field="ticket-options"]');
   const dateSection = root.querySelector('[data-field="date-section"]');
 
@@ -72,10 +69,7 @@ export function createReservationForm(root, { onClose } = {}) {
       ? Math.min(...selectedPets.map((pet) => {
         const ticket = getSchoolTicket(pet, state.selectedTicketIdsByPetId.get(pet.id));
 
-        return Math.max(
-          0,
-          getTicketReservableCount(ticket) - getTicketHoldCount(pet.id, ticket.id),
-        );
+        return Math.max(0, getTicketReservableCount(ticket) - state.selectedDates.size);
       }))
       : 0;
   }
@@ -89,12 +83,6 @@ export function createReservationForm(root, { onClose } = {}) {
     return selectedTickets.length > 0 && selectedTickets.every(Boolean)
       ? Math.min(...selectedTickets.map(getTicketReservableCount))
       : 0;
-  }
-
-  function getTicketHoldCount(petId, ticketId) {
-    return [...state.heldTicketIdsByDate.values()]
-      .filter((ticketIdsByPetId) => ticketIdsByPetId.get(petId) === ticketId)
-      .length;
   }
 
   function renderSummary() {
@@ -113,13 +101,23 @@ export function createReservationForm(root, { onClose } = {}) {
       const isSelected = state.selectedPetIds.has(pet.id);
       const disabled = remaining === 0;
       const availabilityLabel = `${remaining}회 예약 가능`;
+      const selectedTicket = getSchoolTicket(pet, state.selectedTicketIdsByPetId.get(pet.id));
 
       return `
-        <button class="pet-selector__item surface-card${isSelected ? ' surface-card--selected pet-selector__item--selected' : ''}" type="button" data-action="toggle-pet" data-pet-id="${pet.id}" ${disabled ? 'disabled' : ''} aria-pressed="${isSelected}">
+        <article class="pet-selector__item surface-card${isSelected ? ' surface-card--selected pet-selector__item--selected' : ''}" ${disabled ? 'data-state="disabled"' : ''}>
+          <button class="pet-selector__pet-button" type="button" data-action="toggle-pet" data-pet-id="${pet.id}" ${disabled ? 'disabled' : ''} aria-pressed="${isSelected}">
           <span class="pet-selector__check" aria-hidden="true">${isSelected ? '✓' : ''}</span>
           <span class="pet-selector__name">${pet.petName}</span>
           <span class="pet-selector__count">${availabilityLabel}</span>
-        </button>
+          </button>
+          ${isSelected ? `
+            <button class="pet-selector__ticket" type="button" data-action="open-ticket-selection" data-pet-id="${pet.id}">
+              <span class="pet-selector__ticket-label">이용권</span>
+              <span class="pet-selector__ticket-value">${selectedTicket ? `${selectedTicket.name} · 예약 가능 ${getTicketReservableCount(selectedTicket)}회` : '이용권을 선택해주세요'}</span>
+              <span class="pet-selector__ticket-chevron" aria-hidden="true">›</span>
+            </button>
+          ` : ''}
+        </article>
       `;
     }).join('');
   }
@@ -128,37 +126,16 @@ export function createReservationForm(root, { onClose } = {}) {
     return [...pets].sort((left, right) => left.petName.localeCompare(right.petName, 'ko-KR'));
   }
 
-  function getSelectedPetsSorted() {
-    return getPetsSorted()
-      .filter((pet) => state.selectedPetIds.has(pet.id))
-  }
-
-  function renderTicketSelection() {
-    const selectedPets = getSelectedPetsSorted();
-    const selectedTicketCount = selectedPets.filter((pet) => (
-      state.selectedTicketIdsByPetId.has(pet.id)
-    )).length;
-
-    ticketSection.hidden = false;
-    ticketSelectionField.disabled = selectedPets.length === 0;
-    ticketSelectionSummary.textContent = `이용권 선택 (${selectedTicketCount}/${selectedPets.length})`;
-  }
-
   function renderTicketOptions() {
     const pet = pets.find((item) => item.id === state.activeTicketPetId);
 
     if (!pet) return;
 
     const selectedTicketId = state.selectedTicketIdsByPetId.get(pet.id);
-    const selectedPets = getSelectedPetsSorted();
-    ticketTabs.innerHTML = selectedPets.map((selectedPet) => `
-      <button class="ticket-selection-sheet__tab${selectedPet.id === pet.id ? ' ticket-selection-sheet__tab--selected' : ''}" type="button" data-action="switch-ticket-pet" data-pet-id="${selectedPet.id}" role="tab" aria-selected="${selectedPet.id === pet.id}">
-        ${selectedPet.petName}
-      </button>
-    `).join('');
+    ticketSheetTitle.textContent = `${pet.petName} 이용권 선택`;
     ticketOptions.innerHTML = getSchoolTickets(pet).map((ticket) => {
       const isSelected = ticket.id === selectedTicketId;
-      const remaining = Math.max(0, getTicketReservableCount(ticket) - getTicketHoldCount(pet.id, ticket.id));
+      const remaining = getTicketReservableCount(ticket);
 
       return `
         <button class="ticket-selection-sheet__option${isSelected ? ' ticket-selection-sheet__option--selected' : ''}" type="button" data-action="select-ticket" data-ticket-id="${ticket.id}" ${remaining === 0 && !isSelected ? 'disabled' : ''} aria-pressed="${isSelected}">
@@ -228,7 +205,6 @@ export function createReservationForm(root, { onClose } = {}) {
 
   function render() {
     renderPets();
-    renderTicketSelection();
     renderCalendar();
     renderSummary();
   }
@@ -246,19 +222,22 @@ export function createReservationForm(root, { onClose } = {}) {
     if (actionTarget.dataset.action === 'toggle-pet') {
       const { petId } = actionTarget.dataset;
 
-      if (state.selectedPetIds.has(petId)) state.selectedPetIds.delete(petId);
-      else state.selectedPetIds.add(petId);
+      if (state.selectedPetIds.has(petId)) {
+        state.selectedPetIds.delete(petId);
+        state.selectedTicketIdsByPetId.delete(petId);
+      } else {
+        const pet = pets.find((item) => item.id === petId);
+        const defaultTicket = getDefaultSchoolTicket(pet);
 
-      state.selectedTicketIdsByPetId.delete(petId);
+        state.selectedPetIds.add(petId);
+        if (defaultTicket) state.selectedTicketIdsByPetId.set(petId, defaultTicket.id);
+      }
       state.selectedDates.clear();
-      state.heldTicketIdsByDate.clear();
       render();
     }
 
     if (actionTarget.dataset.action === 'open-ticket-selection') {
-      state.activeTicketPetId = state.activeTicketPetId && state.selectedPetIds.has(state.activeTicketPetId)
-        ? state.activeTicketPetId
-        : getSelectedPetsSorted()[0]?.id;
+      state.activeTicketPetId = actionTarget.dataset.petId;
       renderTicketOptions();
       ticketSelectionSheet.hidden = false;
       ticketSelectionSheet.dataset.state = 'visible';
@@ -270,13 +249,12 @@ export function createReservationForm(root, { onClose } = {}) {
     }
 
     if (actionTarget.dataset.action === 'select-ticket') {
-      state.selectedTicketIdsByPetId.set(state.activeTicketPetId, actionTarget.dataset.ticketId);
-      render();
-      renderTicketOptions();
-    }
+      const selectedTicketId = actionTarget.dataset.ticketId;
+      const previousTicketId = state.selectedTicketIdsByPetId.get(state.activeTicketPetId);
 
-    if (actionTarget.dataset.action === 'switch-ticket-pet') {
-      state.activeTicketPetId = actionTarget.dataset.petId;
+      state.selectedTicketIdsByPetId.set(state.activeTicketPetId, selectedTicketId);
+      if (previousTicketId && previousTicketId !== selectedTicketId) state.selectedDates.clear();
+      render();
       renderTicketOptions();
     }
 
@@ -295,15 +273,8 @@ export function createReservationForm(root, { onClose } = {}) {
 
       if (state.selectedDates.has(date)) {
         state.selectedDates.delete(date);
-        state.heldTicketIdsByDate.delete(date);
       } else if (getRemainingLimit() > 0) {
         state.selectedDates.add(date);
-        state.heldTicketIdsByDate.set(date, new Map(
-          getSelectedPetsSorted().map((pet) => [
-            pet.id,
-            state.selectedTicketIdsByPetId.get(pet.id),
-          ]),
-        ));
       }
 
       render();
@@ -314,12 +285,6 @@ export function createReservationForm(root, { onClose } = {}) {
         memberId: guardian?.id,
         petIds: [...state.selectedPetIds],
         ticketIdsByPetId: Object.fromEntries(state.selectedTicketIdsByPetId),
-        ticketIdsByDateAndPet: Object.fromEntries(
-          [...state.heldTicketIdsByDate].map(([date, ticketIdsByPetId]) => [
-            date,
-            Object.fromEntries(ticketIdsByPetId),
-          ]),
-        ),
         dateKeys: [...state.selectedDates],
       });
 
