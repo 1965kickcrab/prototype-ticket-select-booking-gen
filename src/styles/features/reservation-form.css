@@ -69,12 +69,22 @@
 }
 
 .pet-selector__item {
+  overflow: hidden;
+  padding: 0;
+  color: var(--color-text);
+  text-align: left;
+}
+
+.pet-selector__pet-button {
   display: grid;
   grid-template-columns: 30px 1fr auto;
   align-items: center;
+  width: 100%;
   min-height: 70px;
   padding: 14px 16px;
-  color: var(--color-text);
+  color: inherit;
+  background: transparent;
+  border: 0;
   text-align: left;
 }
 
@@ -82,7 +92,7 @@
   color: var(--color-primary);
 }
 
-.pet-selector__item:disabled {
+.pet-selector__item[data-state="disabled"] {
   color: var(--color-text-muted);
   background: #fcfcfc;
 }
@@ -114,35 +124,40 @@
   font-size: 15px;
 }
 
-.pet-selector__item:disabled .pet-selector__count {
+.pet-selector__item[data-state="disabled"] .pet-selector__count {
   color: var(--color-text-muted);
 }
 
-.reservation-ticket-field {
+.pet-selector__ticket {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
   align-items: center;
   width: 100%;
-  min-height: 70px;
-  padding: 16px;
+  min-height: 52px;
+  padding: 12px 16px;
   color: var(--color-text);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border-light);
-  border-radius: 16px;
-  font-size: 17px;
+  background: var(--color-background);
+  border: 0;
+  border-top: 1px solid var(--color-border-light);
+  font-size: 14px;
   font-weight: 700;
   text-align: left;
 }
 
-.reservation-ticket-field:disabled {
-  color: var(--color-text-muted);
-  background: #fcfcfc;
-  cursor: not-allowed;
+.pet-selector__ticket-label {
+  color: var(--color-text-secondary);
 }
 
-.reservation-ticket-field__chevron {
+.pet-selector__ticket-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pet-selector__ticket-chevron {
   color: var(--color-text-secondary);
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 300;
 }
 
@@ -187,32 +202,6 @@
 .ticket-selection-sheet__title {
   margin: 0 0 16px;
   font-size: 20px;
-}
-
-.ticket-selection-sheet__tabs {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
-  overflow-x: auto;
-  border-bottom: 1px solid var(--color-border-light);
-}
-
-.ticket-selection-sheet__tab {
-  flex: 0 0 auto;
-  min-height: 42px;
-  min-width: 80px;
-  padding: 0 4px;
-  color: var(--color-text-muted);
-  background: transparent;
-  border: 0;
-  border-bottom: 3px solid transparent;
-  font-size: 16px;
-  font-weight: 800;
-}
-
-.ticket-selection-sheet__tab--selected {
-  color: var(--color-primary);
-  border-bottom-color: var(--color-primary);
 }
 
 .ticket-selection-sheet__options {

@@ -15,6 +15,36 @@ export function getSchoolTickets(pet) {
     : [getLegacySchoolTicket(pet)];
 }
 
+function getDateSortValue(dateValue) {
+  const timestamp = Date.parse(dateValue ?? '');
+
+  return Number.isNaN(timestamp) ? Number.POSITIVE_INFINITY : timestamp;
+}
+
+function getValiditySortValue(ticket) {
+  const validityDays = Number(ticket.validityDays);
+
+  return Number.isFinite(validityDays) ? validityDays : Number.POSITIVE_INFINITY;
+}
+
+export function getDefaultSchoolTicket(pet) {
+  return getSchoolTickets(pet)
+    .filter((ticket) => getTicketReservableCount(ticket) > 0)
+    .sort((left, right) => {
+      const stateDifference = Number(Boolean(left.expiryDate)) - Number(Boolean(right.expiryDate));
+
+      if (stateDifference !== 0) return -stateDifference;
+
+      const leftExpiryDate = getDateSortValue(left.expiryDate);
+      const rightExpiryDate = getDateSortValue(right.expiryDate);
+
+      if (leftExpiryDate < rightExpiryDate) return -1;
+      if (leftExpiryDate > rightExpiryDate) return 1;
+
+      return getValiditySortValue(left) - getValiditySortValue(right);
+    })[0] ?? null;
+}
+
 export function getTicketReservableCount(ticket) {
   return Math.max(0, Number(ticket?.reservableCount ?? 0));
 }

@@ -61,7 +61,7 @@ function createReservation({ guardian, pet, ticket, date, reservationId, created
   };
 }
 
-export function createSchoolReservations({ memberId, petIds, ticketIdsByPetId, ticketIdsByDateAndPet, dateKeys }) {
+export function createSchoolReservations({ memberId, petIds, ticketIdsByPetId, dateKeys }) {
   const { schoolReservationList } = getSchoolReservationData();
   const guardian = getStoredMembers().find((member) => member.id === memberId);
   const selectedPets = guardian?.pets.filter((pet) => petIds.includes(pet.id)) ?? [];
@@ -78,7 +78,7 @@ export function createSchoolReservations({ memberId, petIds, ticketIdsByPetId, t
   }
 
   const ticketAssignments = uniqueDateKeys.flatMap((date) => selectedPets.map((pet) => {
-    const ticketId = ticketIdsByDateAndPet?.[date]?.[pet.id] ?? ticketIdsByPetId?.[pet.id];
+    const ticketId = ticketIdsByPetId?.[pet.id];
 
     return {
       date,
