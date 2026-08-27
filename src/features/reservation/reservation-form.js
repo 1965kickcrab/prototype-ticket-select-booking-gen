@@ -87,7 +87,7 @@ export function createReservationForm(root, { onClose } = {}) {
 
   function renderSummary() {
     const remaining = getSelectedTicketAvailability();
-    selectedDateCount.textContent = `${state.selectedDates.size}건`;
+    selectedDateCount.textContent = `${state.selectedDates.size}회`;
     remainingCount.textContent = `${remaining}회`;
     submitButton.disabled = state.selectedPetIds.size === 0
       || !hasSelectedTicketForEveryPet()
@@ -150,7 +150,7 @@ export function createReservationForm(root, { onClose } = {}) {
   function getDateStatus(dateKey) {
     const todayKey = toDateKey(today);
 
-    if (dateKey < todayKey) {
+    if (dateKey <= todayKey) {
       return 'unavailable';
     }
 
@@ -255,7 +255,8 @@ export function createReservationForm(root, { onClose } = {}) {
       state.selectedTicketIdsByPetId.set(state.activeTicketPetId, selectedTicketId);
       if (previousTicketId && previousTicketId !== selectedTicketId) state.selectedDates.clear();
       render();
-      renderTicketOptions();
+      ticketSelectionSheet.hidden = true;
+      ticketSelectionSheet.dataset.state = 'hidden';
     }
 
     if (actionTarget.dataset.action === 'previous-reservation-month') {

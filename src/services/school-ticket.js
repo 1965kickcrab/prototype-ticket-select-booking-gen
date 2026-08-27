@@ -10,7 +10,7 @@ function getLegacySchoolTicket(pet) {
 }
 
 export function getSchoolTickets(pet) {
-  return Array.isArray(pet.schoolTickets) && pet.schoolTickets.length > 0
+  return Array.isArray(pet.schoolTickets)
     ? pet.schoolTickets
     : [getLegacySchoolTicket(pet)];
 }

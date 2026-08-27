@@ -112,7 +112,7 @@ export function createReservationHistoryDetail(root) {
             </span>
           </button>
           <ul class="reservation-pet-accordion__date-list" id="${dateListId}" ${isExpanded ? '' : 'hidden'}>
-            ${petGroup.reservations.map((reservation) => `
+            ${[...petGroup.reservations].sort((left, right) => right.date.localeCompare(left.date)).map((reservation) => `
               <li class="reservation-date-status">
                 <span class="reservation-date-status__information">
                   <span>${formatDate(reservation.date)}</span>
