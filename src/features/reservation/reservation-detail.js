@@ -1,4 +1,6 @@
 import { cancelSchoolReservations } from '../../services/school-reservation.js';
+import { getSchoolTicket } from '../../services/school-ticket.js';
+import { getStoredMembers } from '../../storage/member-storage.js';
 import { getSchoolReservationData } from '../../storage/school-reservation-storage.js';
 
 const WEEKDAY_LABELS = ['일', '월', '화', '수', '목', '금', '토'];
@@ -14,6 +16,30 @@ function formatDate(dateKey) {
   const date = new Date(year, month - 1, day);
 
   return `${year}년 ${month}월 ${day}일 (${WEEKDAY_LABELS[date.getDay()]})`;
+}
+
+function getTicketRoundLabel(reservation, schoolReservationList, petsById) {
+  if (!reservation.ticketId) return null;
+
+  const ticketReservations = schoolReservationList
+    .filter((item) => item.status === '예약' && item.petId === reservation.petId && item.ticketId === reservation.ticketId)
+    .sort((left, right) => (
+      left.date.localeCompare(right.date)
+      || left.createdAt.localeCompare(right.createdAt)
+      || left.id.localeCompare(right.id)
+    ));
+  const round = ticketReservations.findIndex((item) => item.id === reservation.id) + 1;
+  const pet = petsById.get(reservation.petId);
+  const ticket = pet ? getSchoolTicket(pet, reservation.ticketId) : null;
+  const totalCount = Number(
+    reservation.ticketTotalCount
+    ?? reservation.ticketSnapshot?.totalCount
+    ?? ticket?.totalCount,
+  );
+
+  return round > 0 && Number.isFinite(totalCount) && totalCount > 0
+    ? `${round}/${totalCount}회차`
+    : null;
 }
 
 export function createReservationDetail(root) {
@@ -44,6 +70,8 @@ export function createReservationDetail(root) {
 
   function render() {
     const reservations = getReservations();
+    const { schoolReservationList } = getSchoolReservationData();
+    const petsById = new Map(getStoredMembers().flatMap((member) => member.pets).map((pet) => [pet.id, pet]));
     const cancellable = isCancellable();
     const reservationIds = new Set(reservations.map((reservation) => reservation.id));
 
@@ -62,12 +90,14 @@ export function createReservationDetail(root) {
     cancellationButton.disabled = state.selectedReservationIds.size === 0;
     petList.innerHTML = reservations.map((reservation) => {
       const isSelected = state.selectedReservationIds.has(reservation.id);
+      const ticketRoundLabel = getTicketRoundLabel(reservation, schoolReservationList, petsById);
 
       return `
         <button class="reservation-pet-card surface-card${isSelected ? ' surface-card--selected' : ''}" type="button" data-action="toggle-reservation" data-reservation-id="${reservation.id}" ${canCancelReservations ? '' : 'disabled'} aria-pressed="${isSelected}">
           <span class="reservation-pet-card__content">
             <strong class="reservation-pet-card__name">${reservation.petName}</strong>
             <span class="reservation-pet-card__ticket">${reservation.ticketId ? (reservation.ticketName ?? '유치원 이용권') : '이용권 미등록'}</span>
+            ${ticketRoundLabel ? `<span class="reservation-pet-card__ticket-round">${ticketRoundLabel}</span>` : ''}
           </span>
           ${canCancelReservations ? `<span class="reservation-pet-card__check${isSelected ? ' reservation-pet-card__check--selected' : ''}" aria-hidden="true">${isSelected ? '✓' : ''}</span>` : ''}
         </button>

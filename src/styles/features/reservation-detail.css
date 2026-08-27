@@ -114,6 +114,12 @@
   font-weight: 700;
 }
 
+.reservation-pet-card__ticket-round {
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  font-weight: 700;
+}
+
 .reservation-pet-card__check {
   display: grid;
   width: 30px;

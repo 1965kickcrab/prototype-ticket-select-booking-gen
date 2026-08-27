@@ -40,9 +40,11 @@ function createReservation({ guardian, pet, ticket, date, reservationId, created
     breed: pet.breed ?? '',
     ticketId: ticket.id,
     ticketName: ticket.name,
+    ticketTotalCount: Number(ticket.totalCount ?? ticket.quantity ?? 0),
     ticketSnapshot: {
       id: ticket.id,
       name: ticket.name,
+      totalCount: Number(ticket.totalCount ?? ticket.quantity ?? 0),
     },
     guardianName: guardian.guardianName,
     phoneNumber: guardian.phoneNumber ?? '',
@@ -111,7 +113,7 @@ export function createSchoolReservations({ memberId, petIds, ticketIdsByPetId, d
   }
 
   const unavailableDate = uniqueDateKeys.find((dateKey) => (
-    dateKey < todayKey
+    dateKey <= todayKey
     || getSelectedPetAvailability(
       guardian.pets,
       schoolReservationList,

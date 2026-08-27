@@ -1,11 +1,45 @@
-const DEFAULT_SCHOOL_TICKET = {
-  issuedDate: '2026-07-01',
-  startDate: '2026-07-01',
-  expiryDate: '2026-07-31',
-  validityDays: 30,
-  totalCount: 20,
-  price: 300000,
-};
+export const TICKET_LIST = [
+  {
+    id: 'ticket-school-event-1-7-days', name: '이벤트 이용권 (1회, 7일)', type: 'school', pickdropType: null,
+    quantity: 1, validity: 7, unit: '일', price: 0, startDatePolicy: 'issued-date',
+    reservationDateRule: 'expiry', unlimitedValidity: false, weekdays: null, classIds: null,
+  },
+  {
+    id: 'ticket-school-5-small', name: '유치원 5회 이용권 (소형)', type: 'school', pickdropType: null,
+    quantity: 5, validity: 4, unit: '주', price: 150000, startDatePolicy: 'first-attendance',
+    reservationDateRule: 'expiry', unlimitedValidity: false, weekdays: null, classIds: null,
+  },
+  {
+    id: 'ticket-school-10-small', name: '유치원 10회 이용권 (소형)', type: 'school', pickdropType: null,
+    quantity: 10, validity: 8, unit: '주', price: 300000, startDatePolicy: 'first-reservation',
+    reservationDateRule: 'expiry', unlimitedValidity: false, weekdays: null, classIds: null,
+  },
+  {
+    id: 'ticket-school-5-large', name: '유치원 5회 이용권 (대형)', type: 'school', pickdropType: null,
+    quantity: 5, validity: 4, unit: '주', price: 180000, startDatePolicy: 'issued-date',
+    reservationDateRule: 'no-limit', unlimitedValidity: false, weekdays: null, classIds: null,
+  },
+  {
+    id: 'ticket-school-unlimited', name: '유치원 무제한 이용권', type: 'school', pickdropType: null,
+    quantity: 30, validity: 0, unit: '주', price: 420000, startDatePolicy: 'first-attendance',
+    reservationDateRule: 'no-limit', unlimitedValidity: true, weekdays: null, classIds: null,
+  },
+];
+
+const TICKET_BY_ID = new Map(TICKET_LIST.map((ticket) => [ticket.id, ticket]));
+
+function createSchoolTickets(ticketIds) {
+  return ticketIds.map((ticketId) => {
+    const ticket = TICKET_BY_ID.get(ticketId);
+
+    return {
+      ...ticket,
+      totalCount: ticket.quantity,
+      reservableCount: ticket.quantity,
+      validityDays: ticket.unit === '주' ? ticket.validity * 7 : ticket.validity,
+    };
+  });
+}
 
 export const DEFAULT_MEMBER_LIST = [
   {
@@ -21,28 +55,11 @@ export const DEFAULT_MEMBER_LIST = [
         id: 'pet-byeoli',
         petName: '별이',
         breed: '캐벌리어 킹 찰스 스패니얼',
-        ticketName: '유치원 20회 이용권',
-        schoolTicket: { ...DEFAULT_SCHOOL_TICKET },
-        schoolTickets: [
-          {
-            id: 'ticket-byeoli-regular',
-            name: '유치원 20회 이용권',
-            reservableCount: 8,
-            ...DEFAULT_SCHOOL_TICKET,
-          },
-          {
-            id: 'ticket-byeoli-extra',
-            name: '유치원 10회 이용권',
-            reservableCount: 2,
-            issuedDate: '2026-08-01',
-            startDate: '2026-08-01',
-            expiryDate: '2026-08-31',
-            validityDays: 30,
-            totalCount: 10,
-            price: 160000,
-          },
-        ],
         petTags: ['사교적'],
+        schoolTickets: createSchoolTickets([
+          'ticket-school-5-small',
+          'ticket-school-event-1-7-days',
+        ]),
         birthDate: '2021-04-12',
         animalRegistrationNumber: '410000202100123',
         coatColor: '브라운 앤 화이트',
@@ -50,17 +67,16 @@ export const DEFAULT_MEMBER_LIST = [
         gender: '여아',
         neuteredStatus: '중성화 완료',
         memo: '',
-        remainingCountByType: { school: 10, daycare: 0, oneway: 0, roundtrip: 0 },
-        totalReservableCountByType: { school: 10, daycare: 0, oneway: 0, roundtrip: 0 },
+        remainingCountByType: { school: 6, daycare: 0, oneway: 0, roundtrip: 0 },
+        totalReservableCountByType: { school: 6, daycare: 0, oneway: 0, roundtrip: 0 },
         totalReservedCountByType: { school: 0, daycare: 0, oneway: 0, roundtrip: 0 },
       },
       {
         id: 'pet-bori',
         petName: '보리',
         breed: '푸들',
-        ticketName: '유치원 20회 이용권',
-        schoolTicket: { ...DEFAULT_SCHOOL_TICKET },
         petTags: ['활발함'],
+        schoolTickets: createSchoolTickets(['ticket-school-10-small']),
         birthDate: '2020-09-03',
         animalRegistrationNumber: '410000202000456',
         coatColor: '크림',
@@ -68,17 +84,19 @@ export const DEFAULT_MEMBER_LIST = [
         gender: '남아',
         neuteredStatus: '중성화 완료',
         memo: '낯선 환경에서는 적응 시간이 필요합니다.',
-        remainingCountByType: { school: 8, daycare: 0, oneway: 0, roundtrip: 0 },
-        totalReservableCountByType: { school: 8, daycare: 0, oneway: 0, roundtrip: 0 },
+        remainingCountByType: { school: 10, daycare: 0, oneway: 0, roundtrip: 0 },
+        totalReservableCountByType: { school: 10, daycare: 0, oneway: 0, roundtrip: 0 },
         totalReservedCountByType: { school: 0, daycare: 0, oneway: 0, roundtrip: 0 },
       },
       {
         id: 'pet-ggomong',
         petName: '꼬몽',
         breed: '비숑 프리제',
-        ticketName: '유치원 20회 이용권',
-        schoolTicket: { ...DEFAULT_SCHOOL_TICKET },
         petTags: [],
+        schoolTickets: createSchoolTickets([
+          'ticket-school-5-large',
+          'ticket-school-event-1-7-days',
+        ]),
         birthDate: '2022-02-18',
         animalRegistrationNumber: '410000202200789',
         coatColor: '화이트',
@@ -86,17 +104,16 @@ export const DEFAULT_MEMBER_LIST = [
         gender: '선택 안함',
         neuteredStatus: '미확인',
         memo: '',
-        remainingCountByType: { school: 8, daycare: 0, oneway: 0, roundtrip: 0 },
-        totalReservableCountByType: { school: 8, daycare: 0, oneway: 0, roundtrip: 0 },
+        remainingCountByType: { school: 6, daycare: 0, oneway: 0, roundtrip: 0 },
+        totalReservableCountByType: { school: 6, daycare: 0, oneway: 0, roundtrip: 0 },
         totalReservedCountByType: { school: 0, daycare: 0, oneway: 0, roundtrip: 0 },
       },
       {
         id: 'pet-choco',
         petName: '초코',
         breed: '믹스견',
-        ticketName: '유치원 20회 이용권',
-        schoolTicket: { ...DEFAULT_SCHOOL_TICKET },
         petTags: [],
+        schoolTickets: [],
         birthDate: '2023-05-10',
         animalRegistrationNumber: '410000202300987',
         coatColor: '브라운',
@@ -104,8 +121,8 @@ export const DEFAULT_MEMBER_LIST = [
         gender: '남아',
         neuteredStatus: '중성화 완료',
         memo: '',
-        remainingCountByType: { school: 10, daycare: 0, oneway: 0, roundtrip: 0 },
-        totalReservableCountByType: { school: 10, daycare: 0, oneway: 0, roundtrip: 0 },
+        remainingCountByType: { school: 0, daycare: 0, oneway: 0, roundtrip: 0 },
+        totalReservableCountByType: { school: 0, daycare: 0, oneway: 0, roundtrip: 0 },
         totalReservedCountByType: { school: 0, daycare: 0, oneway: 0, roundtrip: 0 },
       },
     ],
@@ -119,9 +136,11 @@ export const DEFAULT_MEMBER_LIST = [
       id: 'pet-coco',
       petName: '코코',
       breed: '토이 푸들',
-      ticketName: '유치원 20회 이용권',
-      schoolTicket: { ...DEFAULT_SCHOOL_TICKET },
       petTags: [],
+      schoolTickets: createSchoolTickets([
+        'ticket-school-5-small',
+        'ticket-school-event-1-7-days',
+      ]),
       birthDate: '2021-11-21',
       animalRegistrationNumber: '410000202100321',
       coatColor: '애프리콧',
@@ -129,8 +148,8 @@ export const DEFAULT_MEMBER_LIST = [
       gender: '여아',
       neuteredStatus: '중성화 완료',
       memo: '',
-      remainingCountByType: { school: 8, daycare: 0, oneway: 0, roundtrip: 0 },
-      totalReservableCountByType: { school: 8, daycare: 0, oneway: 0, roundtrip: 0 },
+      remainingCountByType: { school: 6, daycare: 0, oneway: 0, roundtrip: 0 },
+      totalReservableCountByType: { school: 6, daycare: 0, oneway: 0, roundtrip: 0 },
       totalReservedCountByType: { school: 0, daycare: 0, oneway: 0, roundtrip: 0 },
     }],
   },
@@ -143,9 +162,11 @@ export const DEFAULT_MEMBER_LIST = [
       id: 'pet-cherry',
       petName: '체리',
       breed: '말티즈',
-      ticketName: '유치원 20회 이용권',
-      schoolTicket: { ...DEFAULT_SCHOOL_TICKET },
       petTags: ['조용함'],
+      schoolTickets: createSchoolTickets([
+        'ticket-school-5-large',
+        'ticket-school-10-small',
+      ]),
       birthDate: '2019-06-07',
       animalRegistrationNumber: '410000201900654',
       coatColor: '화이트',
@@ -153,8 +174,8 @@ export const DEFAULT_MEMBER_LIST = [
       gender: '남아',
       neuteredStatus: '중성화 완료',
       memo: '',
-      remainingCountByType: { school: 5, daycare: 0, oneway: 0, roundtrip: 0 },
-      totalReservableCountByType: { school: 5, daycare: 0, oneway: 0, roundtrip: 0 },
+      remainingCountByType: { school: 15, daycare: 0, oneway: 0, roundtrip: 0 },
+      totalReservableCountByType: { school: 15, daycare: 0, oneway: 0, roundtrip: 0 },
       totalReservedCountByType: { school: 0, daycare: 0, oneway: 0, roundtrip: 0 },
     }],
   },
